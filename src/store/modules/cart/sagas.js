@@ -6,6 +6,8 @@ import { addToCartSuccess, updateAmountSuccess } from './actions';
 import api from '../../../services/api';
 import { formatPrice } from '../../../util/format';
 
+import history from '../../../services/history';
+
 function* addToCart({ id }) {
   const productExists = yield select(state =>
     state.cart.find(p => p.id === id)
@@ -35,6 +37,7 @@ function* addToCart({ id }) {
     };
 
     yield put(addToCartSuccess(data));
+    history.push('/cart');
   }
 }
 
